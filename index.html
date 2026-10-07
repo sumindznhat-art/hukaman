@@ -3,146 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="robots" content="noarchive, nosnippet">
-<title>🎀 Hello Kitty Pro</title>
+<title> MINH Tool</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="assets/css/app.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="login-screen">
-  <div class="login-box">
-    <h1 class="login-title">LE HOANG MINH</h1>
-    <p class="login-sub"><i class="fa-solid fa-lock"></i> Nhập Key</p>
-    <div class="login-avatar" id="avatarTrigger">
-      <div class="login-avatar-ring"></div>
-      <img id="loginAvatarImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23e0f2fe'/><stop offset='100%25' stop-color='%23bae6fd'/></linearGradient></defs><rect fill='url(%23g)' width='200' height='200'/><text x='50%25' y='56%25' font-family='Segoe UI' font-size='100' text-anchor='middle' dominant-baseline='middle'>🎀</text></svg>" alt="Avatar" draggable="false">
-      <div class="login-online-dot"></div>
-    </div>
-    <div class="login-input-group">
-      <i class="fa-solid fa-key icon-left"></i>
-      <input type="password" id="keyInput" placeholder="Nhập Key..." autocomplete="off" spellcheck="false">
-    </div>
-    <button class="login-btn" id="btnLogin" onclick="doLogin()">
-      <span class="login-spinner" id="loginSpinner"></span>
-      <span id="btnText"><i class="fa-solid fa-right-to-bracket"></i> ĐĂNG NHẬP</span>
-    </button>
-    <div class="login-error" id="loginError"></div>
-    <p class="login-footer">©TOOL•<span>MinhLe</span></p>
-  </div>
+<!-- Background động -->
+<div class="bg">
+  <div class="orb orb-pink"></div>
+  <div class="orb orb-cyan"></div>
+  <div class="orb orb-purple"></div>
+  <div class="grid-overlay"></div>
 </div>
 
-<div id="avatar-modal" onclick="if(event.target===this) closeAvatarModal()">
-  <div class="av-modal-box">
-    <div class="av-modal-title">🎀 Đổi Avatar</div>
-    <div class="av-modal-sub">Dán chuỗi Base64 ảnh của bạn vào bên dưới</div>
-    <div class="av-preview"><div class="av-preview-circle" id="avPreview">🎀</div></div>
-    <div class="av-textarea-wrap">
-      <textarea id="avBase64Input" placeholder="Dán chuỗi Base64 ảnh vào đây..."></textarea>
-    </div>
-    <div class="av-actions">
-      <button class="av-btn-act av-btn-save" onclick="saveAvatar()"><i class="fa-solid fa-floppy-disk"></i> LƯU</button>
-      <button class="av-btn-act av-btn-reset" onclick="resetAvatar()"><i class="fa-solid fa-rotate-left"></i> MẶC ĐỊNH</button>
-    </div>
-    <div class="av-modal-hint">💡 Chuỗi Base64 có thể bắt đầu bằng <b>data:image/...</b> hoặc chỉ chuỗi thô</div>
-    <div class="av-status" id="avStatus"></div>
-    <button class="av-modal-close" onclick="closeAvatarModal()"><i class="fa-solid fa-xmark"></i> ĐÓNG</button>
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-icon">🎀</span>
+    <span class="brand-text">LE MINH IOS</span>
   </div>
-</div>
 
-<div id="tool-screen" style="display:none">
-  <div class="tool-bg">
-    <div class="bg-blob bg-blob-1"></div>
-    <div class="bg-blob bg-blob-2"></div>
-    <div class="bg-blob bg-blob-3"></div>
+  <div class="stats-global">
+    <div class="stat stat-win">
+      <i class="fa-solid fa-circle-check"></i>
+      <span id="g-win">0</span>
+    </div>
+    <div class="stat stat-lose">
+      <i class="fa-solid fa-circle-xmark"></i>
+      <span id="g-lose">0</span>
+    </div>
+    <div class="stat stat-rate">
+      <i class="fa-solid fa-chart-line"></i>
+      <span id="g-rate">--%</span>
+    </div>
   </div>
-  <iframe id="gameFrame" src="about:blank" class="game-frame"></iframe>
-  <div class="frame-fallback" id="frameFallback">
-    <div class="ff-box">
-      <div class="ff-icon">🎮</div>
-      <h2 class="ff-title">Không nhúng được trang game</h2>
-      <p class="ff-desc">Trang <b>lc79b.bet</b> đã chặn nhúng iframe.<br>Bấm nút bên dưới để mở tab mới:</p>
-      <button class="ff-btn" onclick="window.open('https://lc79b.bet/','_blank')">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> MỞ TRANG CHÍNH
+
+  <button class="icon-btn" id="btnOpenSite" title="Mở trang chính">
+    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+  </button>
+</header>
+
+<!-- CARD MD5 -->
+<div class="card-wrap" id="wrap-md5" style="top:96px;left:16px">
+  <div class="predict-card" id="card-md5">
+    <div class="card-glow glow-pink"></div>
+    <div class="card-head">
+      <div class="card-tag">
+        <span class="tag-dot"></span>
+        <span class="tag-name">MD5</span>
+      </div>
+      <div class="card-mini-stats">
+        <span class="mini-stat win" id="mini-win-md5">0</span>
+        <span class="mini-stat lose" id="mini-lose-md5">0</span>
+      </div>
+      <button class="toggle-btn" data-card="card-md5">
+        <i class="fa-solid fa-chevron-up"></i>
       </button>
-      <p class="ff-hint">💡 Tool vẫn hoạt động — chỉ không thấy được trang game phía sau thôi.</p>
     </div>
-  </div>
-  <div class="tool-topbar">
-    <button class="topbar-btn" onclick="window.open('https://lc79b.bet/','_blank')"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
-  </div>
-  <div id="app-content">
-    <div class="drag-group" id="drag-md5" style="top:78px;left:18px">
-      <div class="predict-card" id="predict-card-md5">
-        <div class="card-header"><span class="card-title">MD5</span><button class="toggle-btn" data-target="predict-card-md5">−</button></div>
-        <div class="card-body">
-          <span class="sid-value" id="sid-md5">#@hk</span>
-          <div class="tx-row">
-            <div class="tx-circle tai" id="tai-md5">--%</div>
-            <div class="tx-circle xiu" id="xiu-md5">--%</div>
-          </div>
-          <div class="conf-box" id="conf-md5"><span class="conf-level">--</span><span class="conf-num">0%</span></div>
-          <div class="conf-bar"><div class="conf-bar-fill" id="conf-bar-md5"></div></div>
-          <div class="status-text" id="status-md5">Đang tải...</div>
+
+    <div class="card-body">
+      <div class="sid-row">
+        <i class="fa-solid fa-hashtag"></i>
+        <span id="sid-md5">--</span>
+      </div>
+
+      <div class="result-row">
+        <div class="res-circle tai" id="tai-md5">
+          <span class="res-label">TÀI</span>
+          <span class="res-value">--%</span>
+        </div>
+        <div class="res-circle xiu" id="xiu-md5">
+          <span class="res-label">XỈU</span>
+          <span class="res-value">--%</span>
         </div>
       </div>
-    </div>
-    <div class="drag-group" id="drag-hu" style="top:78px;right:18px">
-      <div class="predict-card" id="predict-card-hu">
-        <div class="card-header"><span class="card-title">HŨ</span><button class="toggle-btn" data-target="predict-card-hu">−</button></div>
-        <div class="card-body">
-          <span class="sid-value" id="sid-hu">#@hk</span>
-          <div class="tx-row">
-            <div class="tx-circle tai" id="tai-hu">--%</div>
-            <div class="tx-circle xiu" id="xiu-hu">--%</div>
-          </div>
-          <div class="conf-box" id="conf-hu"><span class="conf-level">--</span><span class="conf-num">0%</span></div>
-          <div class="conf-bar"><div class="conf-bar-fill" id="conf-bar-hu"></div></div>
-          <div class="status-text" id="status-hu">Đang tải...</div>
-        </div>
+
+      <div class="conf-wrap" id="conf-md5">
+        <div class="conf-level" id="conf-level-md5">--</div>
+        <div class="conf-num" id="conf-num-md5">0%</div>
+        <div class="conf-bar"><div class="conf-fill" id="conf-fill-md5"></div></div>
+      </div>
+
+      <div class="status-row">
+        <span class="status-dot"></span>
+        <span class="status-text" id="status-md5">Đang kết nối...</span>
+      </div>
+
+      <div class="hist-label">Lịch sử 10 phiên gần nhất</div>
+      <div class="hist-strip" id="hist-md5">
+        <div class="hist-empty">Chưa có dữ liệu</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Loader động để né dò tìm -->
-<script>
-(function(){
-  var s = document.createElement('script');
-  s.src = 'assets/js/app.min.js';
-  s.async = false;
-  document.body.appendChild(s);
-})();
+<!-- CARD HŨ -->
+<div class="card-wrap" id="wrap-hu" style="top:96px;right:16px">
+  <div class="predict-card" id="card-hu">
+    <div class="card-glow glow-cyan"></div>
+    <div class="card-head">
+      <div class="card-tag">
+        <span class="tag-dot"></span>
+        <span class="tag-name">HŨ</span>
+      </div>
+      <div class="card-mini-stats">
+        <span class="mini-stat win" id="mini-win-hu">0</span>
+        <span class="mini-stat lose" id="mini-lose-hu">0</span>
+      </div>
+      <button class="toggle-btn" data-card="card-hu">
+        <i class="fa-solid fa-chevron-up"></i>
+      </button>
+    </div>
 
-/* ===== ANTI-INSPECT (chặn F12, Ctrl+U, Ctrl+Shift+I, chuột phải) ===== */
-(function(){
-  var block = function(e){ e.preventDefault(); return false; };
-  document.addEventListener('contextmenu', block);
-  document.addEventListener('keydown', function(e){
-    if (
-      e.key === 'F12' ||
-      (e.ctrlKey && e.shiftKey && ['I','J','C','K'].includes(e.key.toUpperCase())) ||
-      (e.ctrlKey && ['U','S','P'].includes(e.key.toUpperCase())) ||
-      (e.metaKey && e.altKey && ['I','J','C','U'].includes(e.key.toUpperCase()))
-    ) {
-      e.preventDefault();
-      return false;
-    }
-  });
-  // Chặn kéo thả xem source
-  document.addEventListener('dragstart', function(e){ if (e.target.tagName === 'IMG') e.preventDefault(); });
-  // Detect devtools mở
-  setInterval(function(){
-    var t0 = performance.now();
-    // eslint-disable-next-line no-debugger
-    debugger;
-    var t1 = performance.now();
-    if (t1 - t0 > 100) { document.body.innerHTML = '<div style="color:#fff;font:600 20px sans-serif;text-align:center;padding:60px 20px;background:#1a0713;height:100vh;display:flex;align-items:center;justify-content:center">⛔ Phát hiện DevTools — vui lòng đóng để tiếp tục</div>'; }
-  }, 1500);
-})();
-</script>
+    <div class="card-body">
+      <div class="sid-row">
+        <i class="fa-solid fa-hashtag"></i>
+        <span id="sid-hu">--</span>
+      </div>
+
+      <div class="result-row">
+        <div class="res-circle tai" id="tai-hu">
+          <span class="res-label">TÀI</span>
+          <span class="res-value">--%</span>
+        </div>
+        <div class="res-circle xiu" id="xiu-hu">
+          <span class="res-label">XỈU</span>
+          <span class="res-value">--%</span>
+        </div>
+      </div>
+
+      <div class="conf-wrap" id="conf-hu">
+        <div class="conf-level" id="conf-level-hu">--</div>
+        <div class="conf-num" id="conf-num-hu">0%</div>
+        <div class="conf-bar"><div class="conf-fill" id="conf-fill-hu"></div></div>
+      </div>
+
+      <div class="status-row">
+        <span class="status-dot"></span>
+        <span class="status-text" id="status-hu">Đang kết nối...</span>
+      </div>
+
+      <div class="hist-label">Lịch sử 10 phiên gần nhất</div>
+      <div class="hist-strip" id="hist-hu">
+        <div class="hist-empty">Chưa có dữ liệu</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast thông báo -->
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
